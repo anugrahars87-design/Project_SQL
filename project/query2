@@ -1,0 +1,12 @@
+with top_skills_ as (
+    select job_title_short,salary_year_avg,job_location,job_id
+    from job_postings_fact
+    left join company_dim on job_postings_fact.company_id=company_dim.company_id
+    
+    where salary_year_avg is not null and job_location ='India'
+    order by salary_year_avg)
+            select top_skills_.*,skills_dim.skills
+            FROM top_skills_
+            inner join skills_job_dim ON top_skills_.job_id=skills_job_dim.job_id
+            inner join skills_dim on skills_job_dim.skill_id=skills_dim.skill_id
+            where skills in ('sql','powerbi','python','excel')
