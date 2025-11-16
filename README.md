@@ -6,15 +6,19 @@ This project focuses on exploring the relationship between in-demand skills and 
 - To calculate the average salary associated with each skill.
 - To provide actionable insights for job seekers and organizations on aligning skill development with market trends.
 ## Methodology
-- Data Source: Job postings dataset containing job titles, work arrangements, salaries, and required skills.
-- Tools Used: SQL for data extraction and aggregation; Excel/visualization tools for presenting results.
+- Data Source: Job postings dataset containing job titles,
+              work arrangements,salaries, and required skills,companys name.
+- Tools Used: SQL for data extraction and aggregation;
+             Excel/ visualization tools for presenting results.
 - Approach:
-- Created two analytical views: one for skill demand (frequency count) and another for average salary.
-- Joined these views to produce a consolidated table showing both demand and salary insights.
-## Expected Outcomes
-- A ranked list of skills most valuable for Data Analysts in remote roles.
-- Clear evidence of how specific skills (e.g., SQL, Python, Excel, Tableau) correlate with higher salaries.
-- Practical guidance for aspiring analysts to prioritize skill development for career growth.
+         Created five analytical views
+
+             1 - top paying job with remote work
+             2 - top paying skill for specific job
+             3 - top paying skills  in specific location
+             4 - top demanded skills
+             5 - skills with top demand and top salary for data analyst
+
 
 ### sql queries :
  [project folder](/project/)
@@ -30,11 +34,11 @@ This project focuses on exploring the relationship between in-demand skills and 
 - Version control and collaboration platform.
 - Used to manage SQL scripts, track changes, and document the project workflow.
 ## postgress
--This project uses SQL with PostgreSQL for data analysis and GitHub for version control and collaboration.
+- This project uses SQL with PostgreSQL for data analysis and GitHub for version control and collaboration.
 
 # Analysis
    
-   - **top paying job**
+   - ## top paying job
 
 ```sql
 select 
@@ -53,3 +57,5 @@ ORDER BY
  salary_year_avg DESC
  LIMIT 10
  ```
+
+ it will analysis the company name of top paying data analyst job
