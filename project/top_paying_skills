@@ -1,4 +1,4 @@
-with top_skills_ as (
+  WITH top_skills as (
     select
      job_title_short,
     salary_year_avg,
