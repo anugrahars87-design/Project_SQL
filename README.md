@@ -190,6 +190,17 @@ ORDER BY
 ![optimal skill](project\pic\Picture4.png)
 
 
+
+## What I Learned
+- **SQL Query Structuring**: I deepened my understanding of how to use CTEs (Common Table Expressions) to simplify complex queries and make them more readable.
+- **Data Filtering & Ranking**: I learned how to filter jobs by location and salary, then rank them using ORDER BY and LIMIT to focus on the most relevant results.
+- **Joins Across Multiple Tables**: I practiced joining fact tables (job_postings_fact) with dimension tables (company_dim, skills_dim) to enrich the dataset with company names and skill details.
+- **skill Mapping**: I saw how bridge tables (skills_job_dim) connect jobs to skills, which taught me the importance of many-to-many relationships in databases.
+- **Career Insights from Data**: Beyond SQL, I realized how queries can be used to generate real-world insights—like identifying which skills are tied to the highest-paying jobs in India.
+- **Practical Application**: This exercise reinforced the idea that SQL isn’t just about querying data—it’s about answering meaningful questions that can guide career decisions and business strategies.
+
+
+
 # conclusion
 
 - Filter and identify the top 10 highest-paying jobs in India with valid salary data.
