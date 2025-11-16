@@ -35,7 +35,11 @@ with skills_demand AS(
  avg_salary
  FROM skills_demand
  inner join average_salary on skills_demand.skill_id=average_salary.skill_id
-
+WHERE skill_count > 10
+ORDER BY
+ avg_salary DESC,
+ skill_count DESC
+ LIMIT 25
 
 
 

@@ -13,10 +13,10 @@ This project focuses on exploring the relationship between in-demand skills and 
 - Approach:
          Created five analytical views
 
-             1 - top paying job with remote work
+             1 - top paying job 
              2 - top paying skill for specific job
              3 - top paying skills  in specific location
-             4 - top demanded skills
+             4 - top demanded skill
              5 - skills with top demand and top salary for data analyst
 
 
@@ -59,3 +59,145 @@ ORDER BY
  ```
 
 ( it will analysis the company name of top paying data analyst job )
+
+
+![top data analyst paying company](project\pic\image.png)
+
+
+
+## top paying skill for specific job
+
+   ```sql
+   SELECT
+       skills,
+       ROUND(AVG(salary_year_avg),0) as avg_salary
+       FROM
+       job_postings_fact
+       INNER JOIN skills_job_dim on job_postings_fact.job_id = skills_job_dim.job_id
+       INNER JOIN skills_dim ON skills_dim.skill_id=skills_job_dim.skill_id
+       WHERE 
+       job_title_short = 'Data Analyst' and salary_year_avg IS NOT NULL 
+
+       GROUP BY skills
+       ORDER BY avg_salary DESC
+       
+       LIMIT 25
+       ```
+
+(it will analysis top paying skill for data analytic)
+```
+
+![top paying skills](project\pic\Picture1.png)
+
+## top paying skill in india
+
+```sql
+with top_skills_ as (
+    select
+     job_title_short,
+    salary_year_avg,
+    job_location,
+    job_id,
+    new_name as company_name
+    from job_postings_fact
+    left join company_dim on job_postings_fact.company_id=company_dim.company_id
+     where salary_year_avg is not null and job_location ='India'
+    order by salary_year_avg DESC
+    LIMIT 10
+    )
+            select top_skills_.*,skills_dim.skills
+            FROM top_skills_
+            inner join skills_job_dim ON top_skills_.job_id=skills_job_dim.job_id
+            inner join skills_dim on skills_job_dim.skill_id=skills_dim.skill_id
+            ORDER BY salary_year_avg DESC
+ ```
+ 
+   - Identify the top 10 highest-paying jobs in India.
+   - Show which companies are offering them.
+   - List the skills required for those jobs.
+   - Provide a salary-first ranking so you can see which skills align with the most lucrative opportunities.
+   
+
+![count of skills for different job](project\pic\Picture2.png)
+
+
+## top demanded skill
+
+```sql
+SELECT
+skills,
+count(skills_job_dim.job_id) AS skill_count
+FROM job_postings_fact
+INNER JOIN skills_job_dim ON job_postings_fact.job_id= skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id= skills_dim.skill_id
+WHERE job_title_short ='Data Analyst'
+GROUP BY skills
+ORDER BY skill_count DESC
+LIMIT 5
+```
+(top demanded skill for data analyst)
+
+
+![data analyst skill](project\pic\Picture3.png)
+
+## skills with top demand and top salary for data analyst
+
+
+```sql
+with skills_demand AS(
+    SELECT
+    skills_dim.skill_id,
+       skills_dim.skills,
+       count(skills_job_dim.job_id) as skill_count
+       FROM
+       job_postings_fact
+       INNER JOIN skills_job_dim on job_postings_fact.job_id = skills_job_dim.job_id
+       INNER JOIN skills_dim ON skills_dim.skill_id=skills_job_dim.skill_id
+       WHERE job_title_short = 'Data Analyst' AND job_work_from_home = true AND 
+       salary_year_avg IS NOT NULL
+       
+       GROUP BY skills_dim.skill_id
+       
+), average_salary AS(
+    SELECT
+    skills_job_dim.skill_id, 
+       ROUND(AVG(salary_year_avg),0) as avg_salary
+       FROM
+       job_postings_fact
+       INNER JOIN skills_job_dim on job_postings_fact.job_id = skills_job_dim.job_id
+       INNER JOIN skills_dim ON skills_dim.skill_id=skills_job_dim.skill_id
+       WHERE 
+       job_title_short = 'Data Analyst'AND job_work_from_home = true
+       and salary_year_avg IS NOT NULL 
+
+       GROUP BY skills_job_dim.skill_id
+      
+)
+ select 
+ skills_demand.skill_id,
+ skills_demand.skills,
+ skill_count,
+ avg_salary
+ FROM skills_demand
+ inner join average_salary on skills_demand.skill_id=average_salary.skill_id
+WHERE skill_count > 10
+ORDER BY
+ avg_salary DESC,
+ skill_count DESC
+ LIMIT 25
+
+```
+![optimal skill](project\pic\Picture4.png)
+
+
+# conclusion
+
+- Filter and identify the top 10 highest-paying jobs in India with valid salary data.
+- Integrate company information to highlight which organizations are offering these roles.
+- Map essential skills to each job, providing a direct link between high-paying opportunities and the competencies required.
+- Rank results by salary, ensuring that the analysis remains focused on the most lucrative career paths.
+This work demonstrates how data analysis can uncover actionable career insights, showing not only which jobs pay the most but also the skills professionals should prioritize to align with those opportunities. The project now provides a strong foundation for further exploration, such as analyzing skill frequency trends or comparing results across different countries.
+
+
+
+
