@@ -58,4 +58,4 @@ ORDER BY
  LIMIT 10
  ```
 
- it will analysis the company name of top paying data analyst job
+( it will analysis the company name of top paying data analyst job )
