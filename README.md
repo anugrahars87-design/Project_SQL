@@ -196,6 +196,8 @@ ORDER BY
 - Integrate company information to highlight which organizations are offering these roles.
 - Map essential skills to each job, providing a direct link between high-paying opportunities and the competencies required.
 - Rank results by salary, ensuring that the analysis remains focused on the most lucrative career paths.
+
+
 This work demonstrates how data analysis can uncover actionable career insights, showing not only which jobs pay the most but also the skills professionals should prioritize to align with those opportunities. The project now provides a strong foundation for further exploration, such as analyzing skill frequency trends or comparing results across different countries.
 
 
